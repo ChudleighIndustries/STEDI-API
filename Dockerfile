@@ -2,3 +2,4 @@
 FROM nginx
 # Copy command copies a file or directory into a pod/container
 COPY ./index.html /usr/share/nginx/html
+COPY ./styles.css /usr/share/nginx/css
