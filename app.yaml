@@ -55,24 +55,24 @@ spec:
 # HttpGet instructs kubernetes to do an HTTP request to check health
             httpGet:
 # Path defines the url to use when doing the HTTP request
-              path: /
+ #             path: /
 # Port defines the port to use when doing the HTTP request
               port: 4567
 # initialDelaySeconds tells Kubernetes to wait before doing a request
-            initialDelaySeconds: 3
+            initialDelaySeconds: 10
 # periodSeconds tells Kubernetes how often to check health
             periodSeconds: 3
----
+#---
 # apiVersion tells Kubernetes which version of yaml to use
-apiVersion: v1
+#apiVersion: v1
 # Kind tells Kubernetes what kind of object to create
-kind: Service
+#kind: Service
 # Metadata contains attributes about the object
-metadata:
+#metadata:
   # Name is the name of the object we are creating
-  name: stedi-levi-loadbalancer
+  #name: stedi-levi-loadbalancer
 # Spec is the specification for the object (or the loadbalancer)
-spec:
+#spec:
   # Selector tells the network layer how to find the right pod
   selector:
     # App tells the selector which app to send traffic to
@@ -86,3 +86,40 @@ spec:
     - port: 80
     # Targetport is the port the pod listens on inside Kubernetes
       targetPort: 4567
+---
+apiVersion: networking.gke.io/v1
+kind: ManagedCertificate
+metadata:
+  name: stedi-certificate-levi
+spec:
+  domains: 
+  - levichud.cit262.com
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name:  stedi-nodeport-levi
+spec:
+  selector:
+    app: mc-service
+  type: NodePort
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 4567
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stedi-ingress-levi
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: stedi-public-levi
+    networking.gke.io/managed-certificates: stedi-certificate-levi
+    kubernetes.io/ingress.class: "gce"
+    # the below line wasn't there before
+spec:
+  defaultBackend:
+    service:
+      name: stedi-nodeport-levi
+      port:
+        number: 80
