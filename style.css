@@ -1,155 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bitter:wght@300&display=swap');
-
-:root {
-    /* Colors */
-    --primary: #2E4057;
-    --secondary: #F18F01;
-    --accent1: #048BA8;
-    --accent2: #99C24D;
-    --white: white;
-    --light-grey: #fbfbfb;
-
-    /* Fonts */
-    --font-anton: 'Anton', sans-serif;
-    --font-bitter: 'Bitter', serif;
-
-    /* Sizes */
-    --max-width: 960px;
+/*
+ * DOM element rendering detection
+ * https://davidwalsh.name/detect-node-insertion
+ */
+ @keyframes chartjs-render-animation {
+	from { opacity: 0.99; }
+	to { opacity: 1; }
 }
 
-html{
-    font-family: var(--font-bitter);
-}
-body { background-color: var(--primary); }
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-anton);
-    color: var(--accent1);
+.chartjs-render-monitor {
+	animation: chartjs-render-animation 0.001s;
 }
 
-p{
-    color: var(--white);
-    line-height: 1.8em;
+/*
+ * DOM element resizing detection
+ * https://github.com/marcj/css-element-queries
+ */
+.chartjs-size-monitor,
+.chartjs-size-monitor-expand,
+.chartjs-size-monitor-shrink {
+	position: absolute;
+	direction: ltr;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	overflow: hidden;
+	pointer-events: none;
+	visibility: hidden;
+	z-index: -1;
 }
 
-nav ul {
-    list-style-type: none;
-    display: flex;
+.chartjs-size-monitor-expand > div {
+	position: absolute;
+	width: 1000000px;
+	height: 1000000px;
+	left: 0;
+	top: 0;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 2em 0;
-}
-
-.logo-img img {
-    border-radius: 50%;
-    border: 5px solid var(--white);
-}
-
-.main-img-box img {
-    width: var(--max-width);
-}
-
-a {
-    font-family: var(--font-bitter);
-    color: var(--accent2);
-    text-decoration: none;
-    padding: 5px 10px;
-    border-radius: 3px;
-    transition: background-color .5s;
-}
-
-
-nav ul li {
-    margin: 1em;
-}
-
-nav ul li a:hover {
-    background-color: var(--accent2);
-    color: var(--white);
-}
-
-#content {
-    max-width: var(--max-width);
-    margin: 0 auto;
-}
-
-.post {
-    display: flex;
-    margin: 3em 0;
-    align-items: flex-start;
-    flex-direction: row-reverse;
-}
-
-.post:nth-last-of-type(2n + 1){
-    flex-direction: row;
-}
-
-.post div {
-    padding: 0 3em;
-}
-
-.post div h2 {
-    margin: 0;
-}
-
-
-footer {
-    margin: 3em 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.social a img {
-    border-radius: 50%;
-    border: 2px solid var(--white);
-}
-
-#rules {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 1fr 1fr;
-}
-
-.rule {
-    padding: 10px;
-    transition: background-color .5s;
-}
-.rule:hover {
-    background-color: var(--white);
-    border-radius: 3px;
-    cursor: pointer;
-}
-
-.rule:hover p{
-    color: var(--primary);
-}
-#invite-form {
-    display: flex;
-    flex-direction: column;
-}
-#submit-button {
-    height: 3em;
-    width: 10em;
-    border: none;
-    border-radius: 3px;
-    background-color: var(--secondary);
-    align-self: flex-end;
-    margin-right: 1em;
-    font-size: 1em;
-    font-weight: 600;
-    color: var(--white);
-}
-
-#feedback {
-    background-color: var(--secondary);
-    color: var(--white);
-    border-radius: 5px;
-    padding: .5em;
-    display: none;
+.chartjs-size-monitor-shrink > div {
+	position: absolute;
+	width: 200%;
+	height: 200%;
+	left: 0;
+	top: 0;
 }
