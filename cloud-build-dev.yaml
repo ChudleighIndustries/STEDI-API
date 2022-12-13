@@ -44,7 +44,7 @@ steps:
     args:
       - 'scale'
       - 'deploy'
-      - 'stedi-levi'
+      - 'stedi-levi-dev'
       - '--replicas=0'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
@@ -65,7 +65,7 @@ steps:
     args:
       - 'scale'
       - 'deploy'
-      - 'stedi-levi'
+      - 'stedi-levi-dev'
       - '--replicas=1'
     env:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
