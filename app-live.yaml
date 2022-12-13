@@ -88,7 +88,7 @@ metadata:
   name: stedi-nodeport-levi
 spec:
   selector:
-    app: stedi-levi-live
+    app: stedi-levi
   type: NodePort
   ports:
     - protocol: TCP
