@@ -71,11 +71,11 @@ steps:
       - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
       - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-1'
         # This step deploys the stage application in Kubernetes
-  - name: 'gcr.io/cloud-builders/gke-deploy'
+  # This step deploys the stage application in Kubernetes
+  - name: 'gcr.io/cloud-builders/gcloud'
     args:
-      - run
-      - --filename=cloud-build-live.yaml
-      - --image=gcr.io/$PROJECT_ID/constellationweb:$_SHORT_SHA
-      - --output=/tmp/outputtest
-      - --location=us-east1-b
-      - --cluster=cluster-1 
+     - builds
+     - submit
+     - --config
+     - cloudbuild-stage.yaml
+     - --output=/tmp/outputtest
