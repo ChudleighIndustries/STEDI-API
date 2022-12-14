@@ -78,4 +78,4 @@ steps:
      - builds
      - submit
      - --config
-     - cloudbuild-stage.yaml
+     - cloud-build-live.yaml
