@@ -58,6 +58,7 @@ steps:
       - --image=gcr.io/$PROJECT_ID/stedi-levi:latest
       - --location=us-central1-c
       - --cluster=cluster-1
+      - --output=/tmp/outputtest
 
   # This step scales up the stedi pod
   - name: 'gcr.io/cloud-builders/kubectl'
@@ -78,4 +79,3 @@ steps:
      - submit
      - --config
      - cloudbuild-stage.yaml
-     - --output=/tmp/outputtest
