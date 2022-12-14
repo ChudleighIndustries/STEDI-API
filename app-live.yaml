@@ -33,10 +33,10 @@ spec:
             - name: REDIS_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: redis-secret-live-levi
+                  name: redis-secret-dev-levi
                   key: REDIS_PASS
             - name: REDIS_HOST
-              value: "redis-stedi-live-levi"
+              value: "redis-stedi-dev-levi"
             - name: REDIS_PORT
               value: "6379"
             - name: REDIS_DB
