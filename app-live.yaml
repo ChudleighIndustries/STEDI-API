@@ -100,8 +100,8 @@ spec:
   metadata:
     name: stedi-ingress-levi-live
     annotations:
-      kubernetes.io/ingress.global-static-ip-name: stedi-public-levi-live
-      networking.gke.io/managed-certificates: stedi-certificate-levi-live
+      kubernetes.io/ingress.global-static-ip-name: stedi-public-levi
+      networking.gke.io/managed-certificates: stedi-certificate-levi
       kubernetes.io/ingress.allow-http: "false"
       kubernetes.io/ingress.class: "gce"
   spec:
@@ -112,7 +112,7 @@ spec:
             pathType: ImplementationSpecific
             backend:
               service:
-                name: stedi-nodeport-levi-live
+                name: stedi-nodeport-levi
                 port:
                   number: 80
           - path: /discounted
